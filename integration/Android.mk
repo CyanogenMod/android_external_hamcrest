@@ -1,4 +1,4 @@
-# Copyright (C) 2012 The Android Open Source Project
+# Copyright (C) 2014 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,25 +16,7 @@
 
 LOCAL_PATH := $(call my-dir)
 
-# build for the host JVM
-#-----------------------
-include $(CLEAR_VARS)
-LOCAL_SRC_FILES := $(call all-java-files-under, src)
-LOCAL_MODULE := hamcrest-host
-LOCAL_MODULE_TAGS := optional
-include $(BUILD_HOST_JAVA_LIBRARY)
-
-# build for the host dalvik
-# -------------------------
-ifeq ($(WITH_HOST_DALVIK),true)
-include $(CLEAR_VARS)
-LOCAL_SRC_FILES := $(call all-java-files-under, src)
-LOCAL_MODULE := hamcrest-hostdex
-LOCAL_MODULE_TAGS := optional
-include $(BUILD_HOST_DALVIK_JAVA_LIBRARY)
-endif
-
-
+# TODO: add host and hostdex jars
 
 #-------------------------------
 # build a target jar
@@ -43,12 +25,9 @@ include $(CLEAR_VARS)
 
 LOCAL_SRC_FILES := $(call all-java-files-under, src)
 
-LOCAL_MODULE := hamcrest
-
+LOCAL_MODULE := hamcrest-integration
+LOCAL_JAVA_LIBRARIES := hamcrest
 LOCAL_SDK_VERSION := 4
-
 LOCAL_MODULE_TAGS := optional
 
 include $(BUILD_STATIC_JAVA_LIBRARY)
-
-include $(call all-makefiles-under, $(LOCAL_PATH))

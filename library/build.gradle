@@ -8,22 +8,6 @@ sourceSets {
     }
 }
 
-configurations {
-    ast
-}
-
 dependencies {
     compile project(':hamcrest')
-    ast project(':android-support-test')
-}
-
-task astJar(type: Jar) {
-    from sourceSets.main.output
-    dependsOn classes
-    baseName "hamcrest-library"
-    classifier "ast"
-}
-
-artifacts {
-    ast astJar
 }
